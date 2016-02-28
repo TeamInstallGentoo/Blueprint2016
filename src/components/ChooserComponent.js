@@ -10,11 +10,9 @@ class ChooserComponent extends React.Component {
 		return (
 			<div className="chooser-component">
 					<div className="igroup">
-						<h1>Start:</h1>
 						<input type="text" placeholder="Start" value={this.props.start} onChange={this.props.changeStart}/>
 					</div>
 					<div className="igroup">
-						<h1>Destination:</h1>
 						<input type="text" placeholder="Destination" value={this.props.dest} onChange={this.props.changeDest}/>
 					</div>
 					<div className="igroup">

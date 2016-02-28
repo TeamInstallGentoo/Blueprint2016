@@ -7,19 +7,35 @@ require("styles/Nav.scss");
 
 class NavComponent extends React.Component {
 	componentDidMount() {
+		this.renderCanvas();
+		window.addEventListener("deviceorientation", (e) => {
+			console.log(e.alpha);
+		});
+	}
+	renderCanvas() {
 		var ctx = this.refs.canvas.getContext("2d");
+		ctx.clearRect(0, 0, this.refs.canvas.width, this.refs.canvas.height);
+		var coord = this.props.coord;
+		//dims = 20x20
+		var corner = [coord[0] - 10, coord[1] - 10];
 		this.props.floor.forEach((row, r) => {
 			row.forEach((col, c) => {
-				if(col != 1) ctx.fillRect(r*10, c*10, 10, 10);
+				if (col != 0 && col != 1) ctx.fillStyle = "#FF8D06";
+				else ctx.fillStyle = "#595959";
+				if(col != 0) ctx.fillRect(r*10 - corner[0] * 10, c*10 - corner[1] * 10, 10, 10);
 			});
 		});
 		ctx.fillStyle = "#5038E6";
 		this.props.path.forEach((dot) => {
-			ctx.fillRect(dot[0] * 10, dot[1] * 10, 10, 10);
+			ctx.fillRect(dot[0] * 10 - corner[0] * 10, dot[1] * 10 - corner[1] * 10, 10, 10);
 		});
-		window.addEventListener("deviceorientation", (e) => {
-			console.log(e.alpha);
-		});
+		if(this.props.coord) {
+			ctx.fillStyle = "#FF0000";
+			ctx.fillRect(coord[0] * 10 - corner[0] * 10, coord[1] * 10 - corner[1] * 10, 10, 10);
+		}
+	}
+	componentDidUpdate() {
+		this.renderCanvas();
 	}
 	render() {
 		return (
@@ -30,7 +46,7 @@ class NavComponent extends React.Component {
 							<Walk />
 					</FloatingActionButton>
 				</div>
-				<canvas ref="canvas"></canvas>
+				<canvas width="200" height="200" style={{border: "1px solid black"}} ref="canvas"></canvas>
 			</div>
 		);
 	}

@@ -19,7 +19,8 @@ class AppComponent extends React.Component {
 			direction: "",
 			path: [],
 			directions: [],
-			step: 0
+			step: 0,
+			coords: []
 		};
 	}
 	changeStart(e) {
@@ -31,8 +32,11 @@ class AppComponent extends React.Component {
 	generateRoute() {
 		let path = Pathfinder(floor, this.state.start, this.state.destination);
 		this.setState({path});
-		var directions = Navigation.getDirections(Navigation.vectorize(path));
+		var vectors = Navigation.vectorize(path);
+		var directions = Navigation.getDirections(vectors.vectors);
+		var coords = vectors.coords;
 		this.setState({directions});
+		this.setState({coords});
 		this.setState({direction: "Go " + directions[0]});
 	}
 	next() {
@@ -61,6 +65,7 @@ class AppComponent extends React.Component {
 				(
 					(!this.state.choosing) ? (
 						<Nav direction={this.state.direction}
+							coord={this.state.coords[this.state.step]}
 							next={this.next.bind(this)}
 							floor={floor}
 							path={this.state.path}/>

@@ -3,6 +3,7 @@ module.exports = {
 			//Turns array of coordinates into vectors
 			//vector takes in direction(down, right etc) and length
 		var vectors = [];
+		var coords = [];
 		var currDirect = -1;
 		var prevDirect = -1;
 		var curr = [0, 0];
@@ -28,10 +29,12 @@ module.exports = {
 				currDirect = 3;
 			}
 			if (prevDirect != currDirect) {
+				coords.push(pathCoord[i]);
 				vectors.push(currDirect);
 			}
 		}
-		return vectors;
+		coords.push(pathCoord[pathCoord.length - 1]);
+		return {vectors: vectors, coords: coords};
 
 	},
 
