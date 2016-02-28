@@ -3,21 +3,23 @@ module.exports = {
 	{
 		//Turns array of coordinates into vectors
 		//vector takes in direction(down, right etc) and length
-		var vectors;
-	
-		var currDirect = 0;
-		var prevDirect = 0;
-		for(var i = 0;i < pathCoord.length;i++)
+		var vectors = new Array();	
+		console.log(pathCoord);	
+		var currDirect = -1;
+		var prevDirect = -1;
+		var curr = [0,0];
+		var prev = [0,0];
+		for(var i = 0;i < pathCoord.length - 1;i++)
 		{
-			curr = pathCoord[i];
-			prev = pathCoord[i-1];
-		
-			var ri = currDirect[0];
-			var ci = currDirect[1];
+			var curr = pathCoord[i+1];
+			//console.log("curr" + curr);
+			var prev = pathCoord[i];
+			var ri = prev[0];
+			var ci = prev[1];
 			
-			var rf = prevDirect[0];
-			var cf = prevDirect[1];
-			prevDirect = currDict;
+			var rf = curr[0];
+			var cf = curr[1];
+			prevDirect = currDirect;
 			if(rf - ri > 0)
 			{
 				currDirect = 2;
@@ -35,28 +37,40 @@ module.exports = {
 			{
 				vectors.push(currDirect);
 			}
+			//console.log("previous Direction" + prevDirect);
+			//console.log("Current Direction" + currDirect);
 		}
-		console.log(vectors);
 		return vectors;
 	
 	},
 	
-	getNext: function(a,b)
+	getSteps: function(a,b)
 	{
 		//0: up, 1 right, 3 left, 2 down
 		//a: directionFacing
 		//b; //desired direction
+		console.log("a" + a + "b" +b );
 		if(a === b){
-			console.log("forwards")
+			return "forwards";
 		} else if(b - a === 2) {
-			console.log("backwards");
+			return "backwards";
 		} else if((b+1)%4 === a) {
-			console.log("left")
+			return "left";
 		} else if((a+1)%4 === b) {
-			console.log("right")
+			return "right";
 		}
 	},
 	
-
-	
+	getDirections: function(vector)
+	{
+		console.log(vector.length);
+		var facing = 0;
+		var goal;
+		for(var i = 0;i < vector.length; i++)
+		{
+			goal = vector[i];
+			console.log(this.getSteps(facing,goal));
+			facing = goal;
+		}
+	}
 };
