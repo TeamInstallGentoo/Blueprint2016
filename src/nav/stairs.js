@@ -6,7 +6,12 @@ module.exports = {
 		//It'll go down the next optimal staircase
 		floor1 = this.parseRoomNumber(start);
 		floor2 = this.parseRoomNumber(end);
-		return (floor2 - floor1);
+		if(floor2 > floor1)
+			return "Go up " + (floor2 - floor1) + " flights of stairs";
+		else if(floor2 < floor1)
+			return "Go down " + (floor1 - floor2) + " flights of stairs";
+		else
+			return "Stay on this floor";
 	},
 	
 	parseRoomNumber: function(roomNums)
