@@ -5,6 +5,8 @@ import injectTapEventPlugin from "react-tap-event-plugin";
 injectTapEventPlugin();
 import Chooser from "./ChooserComponent.js";
 import Nav from "./NavComponent.js";
+import Pathfinder from "../nav/pathfinder.js";
+var floor = require("../floor3.js");
 
 class AppComponent extends React.Component {
 	constructor() {
@@ -13,7 +15,8 @@ class AppComponent extends React.Component {
 			start: "",
 			destination: "",
 			choosing: true,
-			direction: "Go left"
+			direction: "Go left",
+			path: []
 		};
 	}
 	changeStart(e) {
@@ -31,6 +34,7 @@ class AppComponent extends React.Component {
 	go() {
 		this.generateRoute();
 		this.setState({choosing: false});
+		this.setState({path: Pathfinder(floor, this.state.start, this.state.destination)});
 	}
 	render() {
 		return (
@@ -46,7 +50,9 @@ class AppComponent extends React.Component {
 				(
 					(!this.state.choosing) ? (
 						<Nav direction={this.state.direction}
-							next={this.next.bind(this)}/>
+							next={this.next.bind(this)}
+							floor={floor}
+							path={this.state.path}/>
 					)
 					: ""
 				)

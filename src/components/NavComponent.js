@@ -4,16 +4,18 @@ import React from "react";
 import FloatingActionButton from "material-ui/lib/floating-action-button";
 import Walk from "material-ui/lib/svg-icons/maps/directions-walk";
 require("styles/Nav.scss");
-var floor = require("../floor3.js");
 
 class NavComponent extends React.Component {
 	componentDidMount() {
-		console.log(floor);
 		var ctx = this.refs.canvas.getContext("2d");
-		floor.forEach((row, r) => {
+		this.props.floor.forEach((row, r) => {
 			row.forEach((col, c) => {
 				if(col != 1) ctx.fillRect(r*10, c*10, 10, 10);
 			});
+		});
+		ctx.fillStyle = "#5038E6";
+		this.props.path.forEach((dot) => {
+			ctx.fillRect(dot[0] * 10, dot[1] * 10, 10, 10);
 		});
 	}
 	render() {
