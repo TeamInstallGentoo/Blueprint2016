@@ -1,11 +1,11 @@
 // Pathfinder from "./pathfinder.js";
 
-module.exports = {
+var stairs = {
 	go: function(start,end)
 	{
 		//It'll go down the next optimal staircase
-		floor1 = this.parseRoomNumber(start);
-		floor2 = this.parseRoomNumber(end);
+		var floor1 = stairs.parseRoomNumber(start);
+		var floor2 = stairs.parseRoomNumber(end);
 		if(floor2 > floor1)
 			return "Go up " + (floor2 - floor1) + " flights of stairs";
 		else if(floor2 < floor1)
@@ -13,11 +13,11 @@ module.exports = {
 		else
 			return "Stay on this floor";
 	},
-	
+
 	parseRoomNumber: function(roomNums)
 	{
 		var floors = [0,0,1,0,2,2,2,3,3,4];
-		var digit = (''+roomNums)[0];
+		var digit = (""+roomNums)[0];
 		return floors[digit];
 	},
 	getStairRange: function(stairNum)
@@ -34,3 +34,4 @@ module.exports = {
 		}
 	},
 };
+module.exports = stairs;

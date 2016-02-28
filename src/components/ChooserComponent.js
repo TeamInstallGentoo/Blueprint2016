@@ -4,6 +4,7 @@ import React from "react";
 
 require("styles/Chooser.scss");
 import RaisedButton from "material-ui/lib/raised-button";
+import Stairs from "../nav/stairs.js";
 
 class ChooserComponent extends React.Component {
 	componentDidMount() {
@@ -40,6 +41,9 @@ class ChooserComponent extends React.Component {
 					</div>
 					<div className="igroup">
 						<input type="text" placeholder="Destination" value={this.props.dest} onChange={this.props.changeDest}/>
+					</div>
+					<div className="warning">
+						{((Stairs.go(this.props.start, this.props.dest) == "Stay on this floor") ? "" : Stairs.go(this.props.start, this.props.dest))}
 					</div>
 					<div className="igroup">
 						<RaisedButton onClick={this.props.go} label="Go"/>
