@@ -2,10 +2,17 @@ var floor = require("../floor3.js");
 var PF = require("pathfinding");
 
 var coords = [0, 0];
+var coords2 = [0, 0];
 
 floor.map((row, r) => {
 	row.map((col, c) => {
 		if(col == "616") coords = [c, r];
+	});
+});
+
+floor.map((row, r) => {
+	row.map((col, c) => {
+		if(col == "nurse") coords2 = [c, r];
 	});
 });
 
@@ -17,5 +24,5 @@ floor.forEach((row, r) => {
 	});
 });
 var finder = new PF.AStarFinder();
-var path = finder.findPath(4, 6, 11, 11, grid);
+var path = finder.findPath(coords[0], coords[1], coords2[0], coords2[1], grid);
 console.log(path);
