@@ -10,6 +10,8 @@ import Pathfinder from "../nav/pathfinder.js";
 var maps = {
 	maze: require("../floors/maze1.js"),
 	2: require("../floors/floor2.js"),
+	3: require("../floors/floor3.js"),
+	auditorium: require("../floors/auditorium.js")
 };
 
 

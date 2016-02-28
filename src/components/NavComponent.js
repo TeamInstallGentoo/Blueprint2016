@@ -22,7 +22,7 @@ class NavComponent extends React.Component {
 			row.forEach((col, c) => {
 				if (col != 0 && col != 1) ctx.fillStyle = "#FF8D06";
 				else ctx.fillStyle = "#595959";
-				if(col != 0) ctx.fillRect(r*10 - corner[0] * 10, c*10 - corner[1] * 10, 10, 10);
+				if(col != 0) ctx.fillRect(c*10 - corner[0] * 10, r*10 - corner[1] * 10, 10, 10);
 			});
 		});
 		ctx.fillStyle = "#5038E6";

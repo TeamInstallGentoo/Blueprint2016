@@ -11,6 +11,7 @@ class ChooserComponent extends React.Component {
 	}
 	renderCanvas() {
 		var ctx = this.refs.cv.getContext("2d");
+		ctx.clearRect(0, 0, this.refs.cv.width, this.refs.cv.height);
 		this.props.floor.forEach((row, r) => {
 			row.forEach((col, c) => {
 				if (col != 0 && col != 1) ctx.fillStyle = "#FF8D06";
@@ -29,6 +30,8 @@ class ChooserComponent extends React.Component {
       <select value={this.props.map} onChange={this.props.changeMap}>
        <option value="maze">Maze</option>
         <option value="2">Second Floor</option>
+         <option value="3">Third Floor</option>
+          <option value="auditorium">auditorium</option>
       </select>
 					</div>
 					<div className="igroup">
