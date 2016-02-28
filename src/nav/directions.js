@@ -47,9 +47,9 @@ module.exports = {
 		} else if (b - a === 2) {
 			return "backwards";
 		} else if ((b + 1) % 4 === a) {
-			return "left";
-		} else if ((a + 1) % 4 === b) {
 			return "right";
+		} else if ((a + 1) % 4 === b) {
+			return "left";
 		}
 	},
 

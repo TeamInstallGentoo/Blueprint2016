@@ -29,6 +29,7 @@ class ChooserComponent extends React.Component {
 					<div className="igroup">
       <select value={this.props.map} onChange={this.props.changeMap}>
        <option value="maze">Maze</option>
+        <option value="maze2">Maze 2</option>
         <option value="2">Second Floor</option>
          <option value="3">Third Floor</option>
           <option value="auditorium">auditorium</option>
@@ -44,7 +45,7 @@ class ChooserComponent extends React.Component {
 						<RaisedButton onClick={this.props.go} label="Go"/>
 					</div>
 					<div className="igroup">
-						<canvas width="500" height="500" ref="cv"></canvas>
+						<canvas width="610" height="610" ref="cv"></canvas>
 					</div>
 			</div>
 		);
