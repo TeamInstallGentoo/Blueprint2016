@@ -6,9 +6,31 @@ require("styles/Chooser.scss");
 import RaisedButton from "material-ui/lib/raised-button";
 
 class ChooserComponent extends React.Component {
+	componentDidMount() {
+		this.renderCanvas();
+	}
+	renderCanvas() {
+		var ctx = this.refs.cv.getContext("2d");
+		this.props.floor.forEach((row, r) => {
+			row.forEach((col, c) => {
+				if (col != 0 && col != 1) ctx.fillStyle = "#FF8D06";
+				else ctx.fillStyle = "#595959";
+				if(col != 0) ctx.fillRect(r*10, c*10, 10, 10);
+			});
+		});
+	}
+	componentDidUpdate() {
+		this.renderCanvas();
+	}
 	render() {
 		return (
 			<div className="chooser-component">
+					<div className="igroup">
+      <select value={this.props.map} onChange={this.props.changeMap}>
+       <option value="maze">Maze</option>
+        <option value="2">Second Floor</option>
+      </select>
+					</div>
 					<div className="igroup">
 						<input type="text" placeholder="Start" value={this.props.start} onChange={this.props.changeStart}/>
 					</div>
@@ -17,6 +39,9 @@ class ChooserComponent extends React.Component {
 					</div>
 					<div className="igroup">
 						<RaisedButton onClick={this.props.go} label="Go"/>
+					</div>
+					<div className="igroup">
+						<canvas width="500" height="500" ref="cv"></canvas>
 					</div>
 			</div>
 		);

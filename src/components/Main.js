@@ -7,7 +7,11 @@ import Chooser from "./ChooserComponent.js";
 import Nav from "./NavComponent.js";
 import Navigation from "../nav/directions.js";
 import Pathfinder from "../nav/pathfinder.js";
-var floor = require("../floor3.js");
+var maps = {
+	maze: require("../floors/maze1.js"),
+	2: require("../floors/floor2.js"),
+};
+
 
 class AppComponent extends React.Component {
 	constructor() {
@@ -20,7 +24,8 @@ class AppComponent extends React.Component {
 			path: [],
 			directions: [],
 			step: 0,
-			coords: []
+			coords: [],
+			map: "maze"
 		};
 	}
 	changeStart(e) {
@@ -30,7 +35,7 @@ class AppComponent extends React.Component {
 		this.setState({destination: e.target.value});
 	}
 	generateRoute() {
-		let path = Pathfinder(floor, this.state.start, this.state.destination);
+		let path = Pathfinder(maps[this.state.map], this.state.start, this.state.destination);
 		this.setState({path});
 		var vectors = Navigation.vectorize(path);
 		var directions = Navigation.getDirections(vectors.vectors);
@@ -47,6 +52,9 @@ class AppComponent extends React.Component {
 		else direction = "You have arrived at your destination.";
 		this.setState({direction});
 	}
+	changeMap(e) {
+		this.setState({map: e.target.value});
+	}
 	go() {
 		this.generateRoute();
 		this.setState({choosing: false});
@@ -59,7 +67,10 @@ class AppComponent extends React.Component {
 					dest={this.state.destination}
 					changeStart={this.changeStart.bind(this)}
 					changeDest={this.changeDestination.bind(this)}
-					go={this.go.bind(this)}/>)
+					go={this.go.bind(this)}
+					floor={maps[this.state.map]}
+					map={this.state.map}
+					changeMap={this.changeMap.bind(this)}/>)
 				: "")}
 				{
 				(
@@ -67,7 +78,7 @@ class AppComponent extends React.Component {
 						<Nav direction={this.state.direction}
 							coord={this.state.coords[this.state.step]}
 							next={this.next.bind(this)}
-							floor={floor}
+							floor={maps[this.state.map]}
 							path={this.state.path}/>
 					)
 					: ""
