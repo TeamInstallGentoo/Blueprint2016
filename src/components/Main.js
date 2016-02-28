@@ -1,7 +1,10 @@
 require("styles/App.scss");
 
 import React from "react";
+import injectTapEventPlugin from "react-tap-event-plugin";
+injectTapEventPlugin();
 import Chooser from "./ChooserComponent.js";
+import Nav from "./NavComponent.js";
 
 class AppComponent extends React.Component {
 	constructor() {
@@ -9,7 +12,8 @@ class AppComponent extends React.Component {
 		this.state = {
 			start: "",
 			destination: "",
-			choosing: true
+			choosing: true,
+			direction: "Go left"
 		};
 	}
 	changeStart(e) {
@@ -18,8 +22,15 @@ class AppComponent extends React.Component {
 	changeDestination(e) {
 		this.setState({destination: e.target.value});
 	}
-	go() {
+	generateRoute() {
 
+	}
+	next() {
+		this.setState({direction: "Poop"});
+	}
+	go() {
+		this.generateRoute();
+		this.setState({choosing: false});
 	}
 	render() {
 		return (
@@ -31,6 +42,15 @@ class AppComponent extends React.Component {
 					changeDest={this.changeDestination.bind(this)}
 					go={this.go.bind(this)}/>)
 				: "")}
+				{
+				(
+					(!this.state.choosing) ? (
+						<Nav direction={this.state.direction}
+							next={this.next.bind(this)}/>
+					)
+					: ""
+				)
+				}
 			</div>
 		);
 	}
