@@ -1,22 +1,22 @@
-'use strict';
+"use strict";
 
-let path = require('path');
-let webpack = require('webpack');
-let _ = require('lodash');
+let path = require("path");
+let webpack = require("webpack");
+let _ = require("lodash");
 
-let baseConfig = require('./base');
+let baseConfig = require("./base");
 
 // Add needed plugins here
-let BowerWebpackPlugin = require('bower-webpack-plugin');
+let BowerWebpackPlugin = require("bower-webpack-plugin");
 
 let config = _.merge({
-  entry: path.join(__dirname, '../src/index'),
+  entry: path.join(__dirname, "../src/index"),
   cache: false,
-  devtool: 'sourcemap',
+  devtool: "sourcemap",
   plugins: [
     new webpack.optimize.DedupePlugin(),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"production"'
+      "process.env.NODE_ENV": ""production""
     }),
     new BowerWebpackPlugin({
       searchResolveModulesDirectories: false
@@ -30,10 +30,10 @@ let config = _.merge({
 
 config.module.loaders.push({
   test: /\.(js|jsx)$/,
-  loader: 'babel',
+  loader: "babel",
   include: [].concat(
     config.additionalPaths,
-    [ path.join(__dirname, '/../src') ]
+    [ path.join(__dirname, "/../src") ]
   )
 });
 

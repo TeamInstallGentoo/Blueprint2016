@@ -4,20 +4,19 @@
 "use strict";
 
 // Uncomment the following lines to use the react test utilities
-// import React from "react/addons";
-// const TestUtils = React.addons.TestUtils;
+// import TestUtils from "react-addons-test-utils";
 import createComponent from "helpers/shallowRenderHelper";
 
-import Main from "components/Main";
+import ChooserComponent from "components//ChooserComponent.js";
 
-describe("MainComponent", () => {
-    let MainComponent;
+describe("ChooserComponent", () => {
+    let component;
 
     beforeEach(() => {
-      MainComponent = createComponent(Main);
+      component = createComponent(ChooserComponent);
     });
 
     it("should have its component name as default className", () => {
-      expect(MainComponent.props.className).to.equal("index");
+      expect(component.props.className).to.equal("chooser-component");
     });
 });
