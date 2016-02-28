@@ -1,9 +1,14 @@
+// Pathfinder from "./pathfinder.js";
+
 module.exports = {
-	/*goDown: function()
+	go: function(start,end)
 	{
 		//It'll go down the next optimal staircase
+		floor1 = this.parseRoomNumber(start);
+		floor2 = this.parseRoomNumber(end);
+		return (floor2 - floor1);
 	},
-	*/
+	
 	parseRoomNumber: function(roomNums)
 	{
 		var floors = [0,0,1,0,2,2,2,3,3,4];
@@ -23,57 +28,4 @@ module.exports = {
 			return [3,4];
 		}
 	},
-	getPossibleStairs: function(roomNum, direction,goal)
-	{
-		var floor = this.parseRoomNumber(roomNum);
-		var valid = [];
-		console.log(floor);
-		for(var i = 1; i < 10;i ++)  //go through all stairs
-		{
-			if(floor >= this.getStairRange(i)[0] && floor <= this.getStairRange(i)[1]) {
-				//Works
-				valid.push(i);
-			}
-		}
-		console.log(valid);
-		return valid;/*
-		var mostEfficientStairs = [];
-		var distance = 100;
-		
-		for(var i = 0;i < valid.length;i ++)   //goes through physically possible stairs to find most efficient
-		{
-			if(direction === 1)
-			{
-				if(Math.abs((this.getStairRange(valid[i]))[1] -  goal) < distance)
-				{
-					distance = Math.abs((this.getStairRange(valid[i]))[1] -  goal);
-				}
-			}
-		   	else
-		   	{
-				if(Math.abs((this.getStairRange(valid[i]))[0] -  goal)< distance)
-				{
-					distance = Math.abs((this.getStairRange(valid[i]))[0] -  goal);
-				}	
-			}
-		}
-		console.log(distance);
-		for(var i = 0;i < valid.length;i++)
-		{
-			console.log("sdf" + Math.abs(this.getStairRange(valid[i])[1] -  goal));
-			if(Math.abs((this.getStairRange(valid[i]))[direction] -  goal) === distance)
-			{
-				mostEfficientStairs.push(valid[i]);
-			}
-		}
-		return mostEfficientStairs;*/
-	}/*,
-	getClosestStairs: function(roomNum, valid)
-	{
-		//gives distance to a staircase from a coordinate
-		var floor = this.parseRoomNumber(roomNum);
-		for(var i = 0;i < valid.length;i++) {
-			
-		}
-	}*/
 };
