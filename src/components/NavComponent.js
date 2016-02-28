@@ -17,6 +17,9 @@ class NavComponent extends React.Component {
 		this.props.path.forEach((dot) => {
 			ctx.fillRect(dot[0] * 10, dot[1] * 10, 10, 10);
 		});
+		window.addEventListener("deviceorientation", (e) => {
+			console.log(e.alpha);
+		});
 	}
 	render() {
 		return (

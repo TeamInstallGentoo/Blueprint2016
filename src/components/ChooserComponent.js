@@ -3,6 +3,7 @@
 import React from "react";
 
 require("styles/Chooser.scss");
+import RaisedButton from "material-ui/lib/raised-button";
 
 class ChooserComponent extends React.Component {
 	render() {
@@ -17,7 +18,7 @@ class ChooserComponent extends React.Component {
 						<input type="text" placeholder="Destination" value={this.props.dest} onChange={this.props.changeDest}/>
 					</div>
 					<div className="igroup">
-						<button onClick={this.props.go}>go</button>
+						<RaisedButton onClick={this.props.go} label="Go"/>
 					</div>
 			</div>
 		);
