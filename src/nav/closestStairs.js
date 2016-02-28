@@ -1,18 +1,21 @@
-var Stairs = require("./stairs.js");
 var Pathfinder = require("./pathfinder.js");
-
 module.exports = {
-	getGoodStair: function(roomNum, roomFloor,direction) {
-		var ok = getPossibleStairs(roomNum,0,1)
-		var minimum = 100;
-		var goodStair;
-		for(var i = 0;i < ok.length;i++)
-		{
-			if(Pathfinder(7, roomNum, "s"+ok[i]) < minimum) {
-				minimum = Pathfinder(7, roomNum, "s"+ok[i]);
-				goodStair = ok[i];
+	getGoodStair: function(floor, origin) {
+		var closest = 10000;
+		closestName = "";
+		var stairs = [];
+		floor.map((row, r) => {
+			row.map((col, c) => {
+				if(col.match(/s(.*)/)) stairs.push(col);
+			});
+		});
+		stairs.forEach((stair) => {
+			var path = Pathfinder(floor, origin, stair);
+			if(path.length < closest) {
+				closest = path.length;
+				closestName = stair;
 			}
-		}
-		return goodStair;
+		});
+		return closestName;
 	}
-}
+};
